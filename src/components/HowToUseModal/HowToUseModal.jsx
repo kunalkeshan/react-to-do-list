@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
+
+const Modal = styled.div`
+    display: none;
+    position: absolute;
+    top: 50%;
+    left 50%;
+    transform: translate(-50%, -50%);
+`
 
 function HowToUseModal() {
     return (
-        <div>
+        <Modal>
             
-        </div>
+        </Modal>
     )
 }
 
-export default HowToUseModal
+export default HowToUseModal;
