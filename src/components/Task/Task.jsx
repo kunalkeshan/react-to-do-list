@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 const TaskItem = styled.li`
 
@@ -58,8 +60,16 @@ function Task({name, completed, created_at}) {
                 <span>{created_at}</span>
             </div>
             <div id="task-cta">
-                <EditIcon id="edit-btn" />
-                <DeleteIcon id="delete-btn" />
+                <Tooltip title="Edit" arrow>
+                    <IconButton>
+                        <EditIcon id="edit-btn" />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete" arrow>
+                    <IconButton>
+                        <DeleteIcon id="delete-btn" />
+                    </IconButton>
+                </Tooltip>
             </div>
         </TaskItem>
     )

@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Logo from "../../logo.svg"
+
 const Container = styled.header`
 
-    background: var(--bg-nav, limegreen);
     padding: 0.4em;
+    transition: all 500ms;
 
     h1{
-        color: var(--bg-body, red);
-        transition: all 500ms;
+        color: #000;
         width: fit-content;
         margin: 0 auto;
         cursor: pointer;
-
-        :hover {
-            color: #000;
-        }
+        font-weight: bolder;
     }
     
 `

@@ -5,29 +5,11 @@ import Task from '../Task/Task';
 
 const TaskCollection = styled.ul`
 
-    width: 100%;
+    width: clamp(280px, 100%, 720px);
     
 `
 
-const TASKS = [
-    {
-        name: "Task 1",
-        completed: false,
-        created_at: "wed, 10",
-    },
-    {
-        name: "Task 2",
-        completed: false,
-        created_at: "wed, 11",
-    },
-    {
-        name: "Task 3",
-        completed: true,
-        created_at: "wed, 4",
-    },
-];
-
-function TaskList({tasks, updateTasks}) {
+function TaskList({TASKS}) {
     return (
         <TaskCollection>
             {

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import AddTaskInput from '../AddTaskInput/AddTaskInput';
 import TaskList from '../TaskList/TaskList';
 import EditTaskModal from "../EditTaskModal/EditTaskModal";
-import HowToUseModal from "../HowToUseModal/HowToUseModal";
 import SearchTaskInput from '../SearchTaskInput/SearchTaskInput';
 
 const Container = styled.main`
@@ -20,14 +19,46 @@ const Container = styled.main`
 
 `
 
+
+let TASKS = [
+    {
+        name: "Book Appointment",
+        completed: false,
+        created_at: "10th Dec",
+    },
+    {
+        name: "Recharge Mobile",
+        completed: false,
+        created_at: "11th Dec",
+    },
+    {
+        name: "Buy Groceries",
+        completed: true,
+        created_at: "4th Dec",
+    },
+];
+
 function Main() {
+
+    const [allTasks, setAllTasks] = useState(TASKS);
+
+    useEffect(() => {
+        const getTasks = () => {
+            if(!localStorage.getItem("tasks")) {
+                localStorage.setItem("tasks", JSON.stringify(allTasks));
+            } else {
+                TASKS = JSON.parse(localStorage.getItem("tasks"));
+            }
+        }
+        getTasks();
+    }, [allTasks])
+
     return (
         <Container>
             <SearchTaskInput />
             <AddTaskInput />
-            <TaskList />
+            <TaskList TASKS={allTasks}/>
             <EditTaskModal />
-            <HowToUseModal />
         </Container>
     )
 }
