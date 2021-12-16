@@ -1,41 +1,23 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import "./App.css";
 import styled from "styled-components";
 
 import Header from './components/Header/Header';
-import AddTaskInput from './components/AddTaskInput/AddTaskInput';
-import TaskList from './components/TaskList/TaskList';
-import EditTaskModal from "./components/EditTaskModal/EditTaskModal";
-import HowToUseModal from "./components/HowToUseModal/HowToUseModal";
+import Main from "./components/Main/Main";
 
 const Container = styled.div`
-  
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
   
 `
 
 function App() {
-  const [allTasks, setAllTasks] = useState({})
-
-  useEffect(() => {
-    
-  }, [allTasks])
 
   return (
     <Container>
       <Header />
-      <main>
-        <AddTaskInput updateTasks={setAllTasks} />
-        <TaskList tasks={allTasks} updateTasks={setAllTasks}/>
-      </main>
-      <EditTaskModal />
-      <HowToUseModal />
+      <Main />
     </Container>
   );
+
 }
 
 export default App;
