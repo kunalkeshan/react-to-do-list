@@ -15,9 +15,13 @@ const Container = styled.footer`
         cursor: pointer;
     }
 
+    .light{
+        color: #000;
+    }
+
 `
 
-function Footer() {
+function Footer({theme}) {
     let i = 0;
     const handleHelpModal = () => {
         alert("number of times pressed: " + i)
@@ -28,7 +32,10 @@ function Footer() {
         <Container>
             <Tooltip title="Help" arrow>
                 <IconButton onClick={handleHelpModal}>
-                    <HelpIcon id="help-btn" />
+                    <HelpIcon 
+                        id="help-btn" 
+                        className={theme === "light" ? "" : "light"}
+                    />
                 </IconButton>
             </Tooltip>
             <HowToUseModal />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import styled from "styled-components";
 
@@ -16,11 +16,13 @@ const Container = styled.div`
 
 function App() {
 
+  const [theme, setTheme] = useState("light");
+
   return (
     <Container>
-      <Header />
-      <Main />
-      <Footer />
+      <Header theme={theme} setTheme={setTheme} />
+      <Main theme={theme} />
+      <Footer theme={theme} />
     </Container>
   );
 

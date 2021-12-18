@@ -13,8 +13,9 @@ function TaskList({TASKS}) {
     return (
         <TaskCollection>
             {
-                TASKS.map((task) => (
-                    <Task 
+                TASKS.map((task, index) => (
+                    <Task
+                        key={index} 
                         name={task.name}
                         completed={task.completed}
                         created_at={task.created_at}

@@ -11,31 +11,49 @@ const Container = styled.div`
     justify-content: center;
     position: relative;
 
-    #search-icon{
+    .search-icon{
         position: absolute;
         bottom: 4px;
         right: 0;
         transition: all 250ms;
     }
 
-    .active{
-        transform: scale(1.05);
+    #active{
+        transform: rotate(20deg);
     }
 
 `
 
+
 function SearchTaskInput() {
 
     const [iconPlace, setIconPlace] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
-    const handleIconPlace = () => {
-        setIconPlace(iconPlace ? "active" : "")
+    const handleIconFocus = (e) => {
+        e.stopPropagation();
+        setIconPlace("active")
+    }
+
+    const handleIconFocusOut = (e) => {
+        setIconPlace("");
+    }
+
+    const handleSearchValue = (e) => {
+        setSearchValue(e.target.value)
     }
 
     return (
         <Container>
-            <TextField label="Search Tasks" variant="standard" onFocusCapture={handleIconPlace}/>
-            <SearchIcon id="search-icon" className={iconPlace === "active" ? "active" : ""} />
+            <TextField 
+                label="Search Tasks" 
+                variant="standard"
+                value={searchValue} 
+                onFocus={(e) => {handleIconFocus(e)}}
+                onBlur={(e) => handleIconFocusOut(e)}
+                onChange={(e) => {handleSearchValue(e)}}
+            />
+            <SearchIcon className="search-icon" id={iconPlace !== "active" ? "active" : ""} />
         </Container>
     )
 }

@@ -38,7 +38,7 @@ let TASKS = [
     },
 ];
 
-function Main() {
+function Main({theme}) {
 
     const [allTasks, setAllTasks] = useState(TASKS);
 
