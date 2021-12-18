@@ -8,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 
 const TaskItem = styled.li`
 
-    background: var(--bg-task, lightblue);
     list-style: none;
     width: 100%;
     margin-top: 8px;
@@ -52,9 +51,14 @@ const TaskItem = styled.li`
     }
 `
 
-function Task({name, completed, created_at}) {
+function Task({name, completed, created_at, theme}) {
+
+    const DarkModeBox = {
+        background: theme === "light" ? "var(--bg-task, lightblue)" : "var(--bg-task-dark, lightblue)"
+    }
+
     return (
-        <TaskItem>
+        <TaskItem style={DarkModeBox}>
             <div id="task-details">
                 <p className={completed ? "completed" : ""}>{name}</p>
                 <span>{created_at}</span>

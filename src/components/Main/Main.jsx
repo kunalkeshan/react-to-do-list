@@ -5,9 +5,14 @@ import AddTaskInput from '../AddTaskInput/AddTaskInput';
 import TaskList from '../TaskList/TaskList';
 import EditTaskModal from "../EditTaskModal/EditTaskModal";
 import SearchTaskInput from '../SearchTaskInput/SearchTaskInput';
+import Footer from "../Footer/Footer";
 
 const Container = styled.main`
+    transition: all 500ms;
+    height: 100vh;
+`
 
+const Box = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,8 +20,8 @@ const Container = styled.main`
     gap: 1.5em;
     padding: 1em;
     width: 80%;
+    height: 100%;
     margin: 0 auto;
-
 `
 
 
@@ -53,12 +58,19 @@ function Main({theme}) {
         getTasks();
     }, [allTasks])
 
+    const DarkModeBox = {
+        background: theme === "light" ? "" : "#0006"
+    }
+
     return (
-        <Container>
-            <SearchTaskInput />
-            <AddTaskInput />
-            <TaskList TASKS={allTasks}/>
-            <EditTaskModal />
+        <Container style={DarkModeBox}>
+            <Box>
+                <SearchTaskInput theme={theme}/>
+                <AddTaskInput theme={theme}/>
+                <TaskList TASKS={allTasks} theme={theme}/>
+                <EditTaskModal theme={theme}/>
+                <Footer theme={theme}/>
+            </Box>
         </Container>
     )
 }

@@ -14,10 +14,6 @@ import { styled as ms } from '@mui/material/styles';
 const Container = styled.header`
 
     padding: 0.4em;
-    transition: all 500ms;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background: #0002;
 
     img{
@@ -30,7 +26,6 @@ const Container = styled.header`
     }
 
     h1{
-        color: #000;
         margin: 0 auto;
         cursor: pointer;
         font-weight: bolder;
@@ -78,6 +73,14 @@ const Flexed = styled.div`
     align-items: center;
     justify-content: center;
     flex: 1;
+`
+
+const Box = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
 `
 
 const ThemeSwitch = ms(Switch)(({ theme }) => ({
@@ -135,35 +138,40 @@ function Header({theme, setTheme}) {
         setTheme(isLight ? "dark" : "light");
     }
 
-    const DarkMode = {
+    const DarkModeBox = {
         background: theme === "light" ? "#0002" : "#0008"
     }
 
     return (
-        <Container style={DarkMode}>
-            <Flexed>
-                <img src={Logo} alt="react logo" />
-                <h1 className={theme === "light" ? "" : "light"} >React To-Do List</h1>
-            </Flexed>
-            <ButtonGroup variant='outlined'>
-                <IconButton href="https://github.com/kunalkeshan/react-to-do-list" target="_blank">
-                    <Tooltip title="GitHub" arrow>
-                        <GitHubIcon 
-                            id="header-btn" 
-                            className={theme === "light" ? "" : "light"} 
-                        />
-                    </Tooltip>
-                </IconButton>
-                <IconButton href="https://linktr.ee/kunalkeshan" target="_blank">
-                    <Tooltip title="Connect" arrow>
-                        <PublicIcon 
-                            id="header-btn"
-                            className={theme === "light" ? "" : "light"} 
-                         />
-                    </Tooltip>
-                </IconButton>
-            </ButtonGroup>
-            <ThemeSwitch onChange={(e) => {handleTheme(e)}}/>
+        <Container style={DarkModeBox}>
+            <Box>
+                <Flexed>
+                    <img src={Logo} alt="react logo" />
+                    <h1 className={theme === "light" ? "" : "light"} >React To-Do List</h1>
+                </Flexed>
+                <ButtonGroup variant='outlined'>
+                    <IconButton href="https://github.com/kunalkeshan/react-to-do-list" target="_blank">
+                        <Tooltip title="GitHub" arrow>
+                            <GitHubIcon 
+                                id="header-btn" 
+                                className={theme === "light" ? "" : "light"} 
+                            />
+                        </Tooltip>
+                    </IconButton>
+                    <IconButton href="https://linktr.ee/kunalkeshan" target="_blank">
+                        <Tooltip title="Connect" arrow>
+                            <PublicIcon 
+                                id="header-btn"
+                                className={theme === "light" ? "" : "light"} 
+                            />
+                        </Tooltip>
+                    </IconButton>
+                </ButtonGroup>
+                <ThemeSwitch 
+                    onChange={(e) => {handleTheme(e)}}
+                    checked={theme === "light" ? false : true}
+                />
+            </Box>
         </Container>
     )
 }

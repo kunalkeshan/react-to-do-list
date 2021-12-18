@@ -9,7 +9,7 @@ const TaskCollection = styled.ul`
     
 `
 
-function TaskList({TASKS}) {
+function TaskList({TASKS, theme}) {
     return (
         <TaskCollection>
             {
@@ -19,6 +19,7 @@ function TaskList({TASKS}) {
                         name={task.name}
                         completed={task.completed}
                         created_at={task.created_at}
+                        theme={theme}
                     />
                 ))
             }
