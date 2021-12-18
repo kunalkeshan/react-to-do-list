@@ -46,6 +46,8 @@ let TASKS = [
 function Main({theme}) {
 
     const [allTasks, setAllTasks] = useState(TASKS);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [openHTUModal, setOpenHTUModal] = useState(false);
 
     useEffect(() => {
         const getTasks = () => {
@@ -67,9 +69,22 @@ function Main({theme}) {
             <Box>
                 <SearchTaskInput theme={theme}/>
                 <AddTaskInput theme={theme}/>
-                <TaskList TASKS={allTasks} theme={theme}/>
-                <EditTaskModal theme={theme}/>
-                <Footer theme={theme}/>
+                <TaskList 
+                    TASKS={allTasks} 
+                    theme={theme}
+                    openEditModal={openEditModal}
+                    setOpenEditModal={setOpenEditModal}
+                />
+                <EditTaskModal 
+                    theme={theme}
+                    openEditModal={openEditModal}
+                    setOpenEditModal={setOpenEditModal}
+                />
+                <Footer 
+                    theme={theme} 
+                    openHTUModal={openHTUModal}
+                    setOpenHTUModal={setOpenHTUModal}
+                />
             </Box>
         </Container>
     )

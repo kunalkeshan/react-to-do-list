@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import HowToUseModal from "../HowToUseModal/HowToUseModal";
@@ -21,24 +21,42 @@ const Container = styled.footer`
 
 `
 
-function Footer({theme}) {
-    let i = 0;
-    const handleHelpModal = () => {
-        alert("number of times pressed: " + i)
-        i++
+const Overlay = styled.div`
+    width: 100%;
+    height: 100vh;
+    background: #0004;
+    z-index: 2;
+    position: fixed;
+    inset: 0;
+`
+
+function Footer({theme, openHTUModal, setOpenHTUModal}) {
+
+    const handleOpen = () => setOpenHTUModal(true);
+    const handleClose = () => setOpenHTUModal(false);
+
+    const openModalStyles = {
+        display: openHTUModal ? "block" : "none",
     }
 
     return (
         <Container>
+            <Overlay 
+                style={openModalStyles}
+                onClick={handleClose}
+            />
             <Tooltip title="Help" arrow>
-                <IconButton onClick={handleHelpModal}>
+                <IconButton onClick={handleOpen}>
                     <HelpIcon 
                         id="help-btn" 
                         className={theme === "light" ? "" : "light"}
                     />
                 </IconButton>
             </Tooltip>
-            <HowToUseModal />
+            <HowToUseModal 
+                openHTUModal={openHTUModal}
+                setOpenHTUModal={setOpenHTUModal}
+            />
         </Container>
     )
 }

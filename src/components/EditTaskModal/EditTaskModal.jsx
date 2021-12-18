@@ -31,7 +31,7 @@ const EditForm = styled.form`
     margin: 12px auto;
 `
 
-function EditTaskModal({name}) {
+function EditTaskModal({name, openHTUModal, setOpenHTUModal}) {
     return (
         <Modal>
             <div>

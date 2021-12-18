@@ -9,7 +9,7 @@ const TaskCollection = styled.ul`
     
 `
 
-function TaskList({TASKS, theme}) {
+function TaskList({TASKS, theme, openHTUModal, setOpenHTUModal}) {
     return (
         <TaskCollection>
             {
