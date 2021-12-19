@@ -51,10 +51,17 @@ const TaskItem = styled.li`
     }
 `
 
-function Task({name, completed, created_at, theme}) {
+function Task({name, completed, created_at, theme, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+
+    const handleOpen = () => setOpenEditModal(true);
 
     const DarkModeBox = {
         background: theme === "light" ? "var(--bg-task, lightblue)" : "var(--bg-task-dark, lightblue)"
+    }
+
+    const handleEdit = (value) => {
+        handleOpen();
+        setEditTaskValue(value)
     }
 
     return (
@@ -66,7 +73,10 @@ function Task({name, completed, created_at, theme}) {
             <div id="task-cta">
                 <Tooltip title="Edit" arrow>
                     <IconButton>
-                        <EditIcon id="edit-btn" />
+                        <EditIcon 
+                            id="edit-btn" 
+                            onClick={() => handleEdit(name)}
+                        />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete" arrow>

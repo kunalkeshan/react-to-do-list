@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { styled as ms } from '@mui/material/styles';
+import { hover } from '@testing-library/user-event/dist/hover';
 
 
 const Modal = styled.div`
-    display: none;
+    ${'' /* display: none; */}
     position: absolute;
     top: 50%;
     left: 50%;
@@ -17,11 +18,29 @@ const Modal = styled.div`
     width: clamp(300px, 100%, 320px);
     border-radius: 12px;
     text-align: center;
+    z-index: 3;
 `
 
-const EditButton = ms(Button)((theme) => {
+const Flexed = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 1;
+`
+
+const EditButton = ms(Button)((theme) => ({
     
-});
+}));
+
+const CancelButton = ms(Button)((theme) => ({
+    color: "#fff",
+    background: "#f006",
+    borderColor: "#f006",
+    "&:hover": {
+        background: "#f008",
+        borderColor: "#f008",
+    }
+}))
 
 const EditForm = styled.form`
     display: flex;
@@ -31,16 +50,33 @@ const EditForm = styled.form`
     margin: 12px auto;
 `
 
-function EditTaskModal({name, openHTUModal, setOpenHTUModal}) {
+function EditTaskModal({name, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+
+    const handleClose = () => setOpenEditModal(false);
+
+    const openModalStyles = {
+        display: openEditModal ? "block" : "none",
+    }
+
     return (
-        <Modal>
+        <Modal style={openModalStyles}>
             <div>
                 <h2>Edit Task</h2>
                 <span>{name}</span>
             </div>
             <EditForm>
-                <TextField label="Edit task" />
-                <EditButton variant="contained">Edit</EditButton>
+                <TextField 
+                    label="Edit task"
+                    value={editTaskValue}
+                    onChange={(e) => {setEditTaskValue(e.target.value)}}
+                />
+                <Flexed>
+                    <EditButton variant="contained">Edit</EditButton>
+                    <CancelButton 
+                        variant="outlined"
+                        onClick={handleClose}
+                    >Cancel</CancelButton>
+                </Flexed>
             </EditForm>
         </Modal>
     )

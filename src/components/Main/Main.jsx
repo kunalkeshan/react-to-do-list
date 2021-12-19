@@ -48,6 +48,7 @@ function Main({theme}) {
     const [allTasks, setAllTasks] = useState(TASKS);
     const [openEditModal, setOpenEditModal] = useState(false);
     const [openHTUModal, setOpenHTUModal] = useState(false);
+    const [editTaskValue, setEditTaskValue] = useState("");
 
     useEffect(() => {
         const getTasks = () => {
@@ -74,16 +75,22 @@ function Main({theme}) {
                     theme={theme}
                     openEditModal={openEditModal}
                     setOpenEditModal={setOpenEditModal}
+                    editTaskValue={editTaskValue}
+                    setEditTaskValue={setEditTaskValue}
                 />
                 <EditTaskModal 
                     theme={theme}
                     openEditModal={openEditModal}
                     setOpenEditModal={setOpenEditModal}
+                    editTaskValue={editTaskValue}
+                    setEditTaskValue={setEditTaskValue}
                 />
                 <Footer 
                     theme={theme} 
                     openHTUModal={openHTUModal}
                     setOpenHTUModal={setOpenHTUModal}
+                    openEditModal={openEditModal}
+                    setOpenEditModal={setOpenEditModal}
                 />
             </Box>
         </Container>

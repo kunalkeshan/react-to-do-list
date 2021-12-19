@@ -13,7 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import { Button } from '@mui/material';
 
 const HTUModal = styled.div`
-    ${'' /* display: none; */}
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;

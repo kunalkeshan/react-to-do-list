@@ -30,13 +30,16 @@ const Overlay = styled.div`
     inset: 0;
 `
 
-function Footer({theme, openHTUModal, setOpenHTUModal}) {
+function Footer({theme, openHTUModal, setOpenHTUModal, openEditModal, setOpenEditModal}) {
 
     const handleOpen = () => setOpenHTUModal(true);
-    const handleClose = () => setOpenHTUModal(false);
+    const handleClose = () => {
+        setOpenHTUModal(false);
+        setOpenEditModal(false);
+    };
 
     const openModalStyles = {
-        display: openHTUModal ? "block" : "none",
+        display: openHTUModal || openEditModal ? "block" : "none",
     }
 
     return (
