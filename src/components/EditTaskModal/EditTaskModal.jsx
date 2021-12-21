@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { styled as ms } from '@mui/material/styles';
-import { hover } from '@testing-library/user-event/dist/hover';
-
+import taskManager from '../../helper/taskManager';
 
 const Modal = styled.div`
     ${'' /* display: none; */}
@@ -50,9 +49,19 @@ const EditForm = styled.form`
     margin: 12px auto;
 `
 
-function EditTaskModal({name, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+function EditTaskModal({TASKS, setTASKS, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
 
     const handleClose = () => setOpenEditModal(false);
+    
+
+    const handleEdit = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if(!editTaskValue) return alert("value cannot be empty")
+        taskManager("EDIT_TASK", {newName: editTaskValue})
+
+    }
 
     const openModalStyles = {
         display: openEditModal ? "block" : "none",
@@ -62,18 +71,24 @@ function EditTaskModal({name, openEditModal, setOpenEditModal, editTaskValue, se
         <Modal style={openModalStyles}>
             <div>
                 <h2>Edit Task</h2>
-                <span>{name}</span>
             </div>
-            <EditForm>
+            <EditForm
+                onSubmit={(e) => handleEdit(e)}
+            >
                 <TextField 
                     label="Edit task"
                     value={editTaskValue}
                     onChange={(e) => {setEditTaskValue(e.target.value)}}
                 />
                 <Flexed>
-                    <EditButton variant="contained">Edit</EditButton>
+                    <EditButton 
+                        variant="contained"
+                        type="submit"
+                        onClick={(e) => handleEdit(e)}
+                    >Edit</EditButton>
                     <CancelButton 
                         variant="outlined"
+                        type='button'
                         onClick={handleClose}
                     >Cancel</CancelButton>
                 </Flexed>

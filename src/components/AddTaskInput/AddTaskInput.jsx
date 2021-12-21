@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { styled as ms } from '@mui/material/styles';
 
+import taskManager from '../../helper/taskManager';
+
 const AddTaskForm = styled.form`
     
     display: flex;
@@ -26,7 +28,7 @@ const AddButton = ms(Button)((theme) => ({
 
 )
 
-function AddTaskInput({updateTasks}) {
+function AddTaskInput({TASKS, setTASKS}) {
 
     const [input, setInput] = useState("");
 
@@ -42,7 +44,10 @@ function AddTaskInput({updateTasks}) {
             alert("task name cannot be empty");
             return;
         } else {
-            alert(input)
+            const res = taskManager("ADD_TASK", {name: input})
+            setTASKS(JSON.parse(res));
+            setInput("")
+            
         }
     }
 

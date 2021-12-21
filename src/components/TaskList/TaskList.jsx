@@ -9,7 +9,7 @@ const TaskCollection = styled.ul`
     
 `
 
-function TaskList({TASKS, theme, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+function TaskList({TASKS, setTASKS, theme, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
     return (
         <TaskCollection>
             {
@@ -24,6 +24,8 @@ function TaskList({TASKS, theme, openEditModal, setOpenEditModal, editTaskValue,
                         setOpenEditModal={setOpenEditModal}
                         editTaskValue={editTaskValue}
                         setEditTaskValue={setEditTaskValue}
+                        TASKS={TASKS}
+                        setTASKS={setTASKS}
                     />
                 ))
             }

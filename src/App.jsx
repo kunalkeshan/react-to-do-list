@@ -43,7 +43,9 @@ function App() {
         theme={theme} 
         setTheme={setTheme} 
       />
-      <Main theme={theme} />
+      <Main 
+        theme={theme} 
+      />
     </Container>
   );
 

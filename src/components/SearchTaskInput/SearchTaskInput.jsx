@@ -25,7 +25,7 @@ const Container = styled.div`
 `
 
 
-function SearchTaskInput() {
+function SearchTaskInput({theme, TASKS, setTASKS}) {
 
     const [iconPlace, setIconPlace] = useState("");
     const [searchValue, setSearchValue] = useState("");

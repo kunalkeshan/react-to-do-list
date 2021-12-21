@@ -29,17 +29,17 @@ let TASKS = [
     {
         name: "Book Appointment",
         completed: false,
-        created_at: "10th Dec",
+        created_at: 1639278346000,
     },
     {
         name: "Recharge Mobile",
         completed: false,
-        created_at: "11th Dec",
+        created_at: 1639105546000,
     },
     {
         name: "Buy Groceries",
         completed: true,
-        created_at: "4th Dec",
+        created_at: 1639451146000,
     },
 ];
 
@@ -55,11 +55,16 @@ function Main({theme}) {
             if(!localStorage.getItem("tasks")) {
                 localStorage.setItem("tasks", JSON.stringify(allTasks));
             } else {
-                TASKS = JSON.parse(localStorage.getItem("tasks"));
+                setAllTasks(JSON.parse(localStorage.getItem("tasks")));
             }
         }
         getTasks();
+    }, [])
+
+    useEffect(() => {
+        
     }, [allTasks])
+
 
     const DarkModeBox = {
         background: theme === "light" ? "" : "#0006"
@@ -68,10 +73,19 @@ function Main({theme}) {
     return (
         <Container style={DarkModeBox}>
             <Box>
-                <SearchTaskInput theme={theme}/>
-                <AddTaskInput theme={theme}/>
+                <SearchTaskInput 
+                    theme={theme}
+                    TASKS={allTasks}
+                    setTASKS={setAllTasks} 
+                />
+                <AddTaskInput 
+                    theme={theme}
+                    TASKS={allTasks}
+                    setTASKS={setAllTasks} 
+                />
                 <TaskList 
-                    TASKS={allTasks} 
+                    TASKS={allTasks}
+                    setTASKS={setAllTasks} 
                     theme={theme}
                     openEditModal={openEditModal}
                     setOpenEditModal={setOpenEditModal}
@@ -79,6 +93,8 @@ function Main({theme}) {
                     setEditTaskValue={setEditTaskValue}
                 />
                 <EditTaskModal 
+                    TASKS={allTasks}
+                    setTASKS={setAllTasks} 
                     theme={theme}
                     openEditModal={openEditModal}
                     setOpenEditModal={setOpenEditModal}

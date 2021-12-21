@@ -6,6 +6,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
+import moment from 'moment';
+import taskManager from '../../helper/taskManager';
+
 const TaskItem = styled.li`
 
     list-style: none;
@@ -51,7 +54,7 @@ const TaskItem = styled.li`
     }
 `
 
-function Task({name, completed, created_at, theme, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+function Task({TASKS, setTASKS, name, completed, created_at, theme, setOpenEditModal, editTaskValue, setEditTaskValue}) {
 
     const handleOpen = () => setOpenEditModal(true);
 
@@ -59,28 +62,34 @@ function Task({name, completed, created_at, theme, setOpenEditModal, editTaskVal
         background: theme === "light" ? "var(--bg-task, lightblue)" : "var(--bg-task-dark, lightblue)"
     }
 
-    const handleEdit = (value) => {
+    const handleEdit = (e, value) => {
         handleOpen();
         setEditTaskValue(value)
+    }
+
+    const handleDelete = (name) => {
+        const res = taskManager("DELETE_TASK", {name});
+        setTASKS(JSON.parse(res));
     }
 
     return (
         <TaskItem style={DarkModeBox}>
             <div id="task-details">
-                <p className={completed ? "completed" : ""}>{name}</p>
-                <span>{created_at}</span>
+                <p className={completed ? "completed all-tasks" : "all-tasks"}>{name}</p>
+                <span>{moment(created_at).calendar()}</span>
             </div>
             <div id="task-cta">
                 <Tooltip title="Edit" arrow>
-                    <IconButton>
-                        <EditIcon 
-                            id="edit-btn" 
-                            onClick={() => handleEdit(name)}
-                        />
+                    <IconButton
+                        onClick={(e) => handleEdit(e, name)}
+                    >
+                        <EditIcon id="edit-btn" />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete" arrow>
-                    <IconButton>
+                    <IconButton
+                        onClick={() => handleDelete(name)}
+                    >
                         <DeleteIcon id="delete-btn" />
                     </IconButton>
                 </Tooltip>
