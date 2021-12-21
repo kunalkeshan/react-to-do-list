@@ -20,7 +20,7 @@ const Container = styled.header`
         width: clamp(40px, 100%, 72px);
         height: auto;
         animation: rotate 4s infinite ease-in-out;
-        @media(max-width: 420px){
+        @media(max-width: 600px){
             width: clamp(40px, 100%, 48px);
         }
     }
@@ -30,7 +30,7 @@ const Container = styled.header`
         cursor: pointer;
         font-weight: bolder;
 
-        @media(max-width: 420px){
+        @media(max-width: 600px){
             font-size: 1.4rem;
         }
     }
@@ -43,7 +43,7 @@ const Container = styled.header`
             transform: scale(1.02) rotate(12deg);
         }
 
-        @media(max-width: 420px){
+        @media(max-width: 600px){
             font-size: 1.4rem;
         }
     }

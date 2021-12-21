@@ -9,7 +9,7 @@ const TaskCollection = styled.ul`
     
 `
 
-function TaskList({TASKS, setTASKS, theme, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+function TaskList({TASKS, setTASKS, theme, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue, selectedTask, setSelectedTask, searchValue}) {
     return (
         <TaskCollection>
             {
@@ -19,6 +19,8 @@ function TaskList({TASKS, setTASKS, theme, openEditModal, setOpenEditModal, edit
                         name={task.name}
                         completed={task.completed}
                         created_at={task.created_at}
+                        edited_at={task.edited_at}
+                        hidden={task.hidden}
                         theme={theme}
                         openEditModal={openEditModal}
                         setOpenEditModal={setOpenEditModal}
@@ -26,6 +28,9 @@ function TaskList({TASKS, setTASKS, theme, openEditModal, setOpenEditModal, edit
                         setEditTaskValue={setEditTaskValue}
                         TASKS={TASKS}
                         setTASKS={setTASKS}
+                        selectedTask={selectedTask}
+                        setSelectedTask={setSelectedTask}
+                        searchValue={searchValue}
                     />
                 ))
             }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import TextField from '@mui/material/TextField';
@@ -49,7 +49,7 @@ const EditForm = styled.form`
     margin: 12px auto;
 `
 
-function EditTaskModal({TASKS, setTASKS, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue}) {
+function EditTaskModal({setTASKS, openEditModal, setOpenEditModal, editTaskValue, setEditTaskValue, selectedTask, setSelectedTask}) {
 
     const handleClose = () => setOpenEditModal(false);
     
@@ -59,8 +59,9 @@ function EditTaskModal({TASKS, setTASKS, openEditModal, setOpenEditModal, editTa
         e.stopPropagation();
         
         if(!editTaskValue) return alert("value cannot be empty")
-        taskManager("EDIT_TASK", {newName: editTaskValue})
-
+        const res = taskManager("EDIT_TASK", {newName: editTaskValue, name: selectedTask})
+        setTASKS(JSON.parse(res))
+        handleClose();
     }
 
     const openModalStyles = {
@@ -79,6 +80,7 @@ function EditTaskModal({TASKS, setTASKS, openEditModal, setOpenEditModal, editTa
                     label="Edit task"
                     value={editTaskValue}
                     onChange={(e) => {setEditTaskValue(e.target.value)}}
+                    autoFocus
                 />
                 <Flexed>
                     <EditButton 

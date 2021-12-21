@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
+import taskManager from '../../helper/taskManager';
+import { TaskSharp } from '@mui/icons-material';
 
 const Container = styled.div`
 
@@ -25,10 +27,9 @@ const Container = styled.div`
 `
 
 
-function SearchTaskInput({theme, TASKS, setTASKS}) {
+function SearchTaskInput({theme, TASKS, setTASKS, searchValue, setSearchValue}) {
 
     const [iconPlace, setIconPlace] = useState("");
-    const [searchValue, setSearchValue] = useState("");
 
     const handleIconFocus = (e) => {
         e.stopPropagation();
@@ -37,11 +38,36 @@ function SearchTaskInput({theme, TASKS, setTASKS}) {
 
     const handleIconFocusOut = (e) => {
         setIconPlace("");
+        setSearchValue("")
     }
 
-    const handleSearchValue = (e) => {
+    const handleSearch = (e) => {
         setSearchValue(e.target.value)
     }
+
+    useEffect(() => {
+
+
+        const doSearch = () => {
+            const res = taskManager("SEARCH_TASK", {searchValue})
+            setTASKS(JSON.parse(res));
+        }
+
+        const defaultState = () => {
+            if(!TASKS) return 
+            setTASKS((tasks) => {
+                return tasks.map(task => {
+                    task.hidden = false;
+                    return task;
+                })
+            })
+        }
+
+        defaultState();
+        searchValue ? doSearch() : defaultState();
+
+        doSearch();
+    }, [searchValue])
 
     return (
         <Container>
@@ -49,9 +75,9 @@ function SearchTaskInput({theme, TASKS, setTASKS}) {
                 label="Search Tasks" 
                 variant="standard"
                 value={searchValue} 
-                onFocus={(e) => {handleIconFocus(e)}}
-                onBlur={(e) => handleIconFocusOut(e)}
-                onChange={(e) => {handleSearchValue(e)}}
+                onFocus={handleIconFocus}
+                onBlur={handleIconFocusOut}
+                onChange={handleSearch}
             />
             <SearchIcon className="search-icon" id={iconPlace !== "active" ? "active" : ""} />
         </Container>
